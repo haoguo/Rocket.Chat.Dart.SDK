@@ -1,0 +1,8 @@
+name: rocket.chat.dart
+description: n/a
+version: 0.0.1
+author: haoguo <bard.guo@gmail.com>
+homepage: https://github.com/haoguo/rocket.chat.dart
+environment:
+  sdk: ">=1.8.0 <3.0.0"
+
