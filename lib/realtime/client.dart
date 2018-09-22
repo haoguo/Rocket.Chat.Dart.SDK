@@ -6,7 +6,7 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:ddp/ddp.dart' as ddp;
-import 'package:rocket.chat.dart/models/models.dart';
+import 'package:rocket_chat_dart/models/models.dart';
 
 part 'channels.dart';
 part 'emoji.dart';

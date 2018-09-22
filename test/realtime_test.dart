@@ -1,6 +1,6 @@
 import 'package:ddp/ddp.dart';
-import 'package:rocket.chat.dart/models/models.dart';
-import 'package:rocket.chat.dart/realtime/client.dart';
+import 'package:rocket_chat_dart/models/models.dart';
+import 'package:rocket_chat_dart/realtime/client.dart';
 import 'package:test/test.dart';
 
 void main() {
