@@ -46,6 +46,8 @@ class Client extends Object
     this._ddp = ddp.DdpClient(name, wsUrl, uri.toString());
     if (debug) {
       this._ddp.setSocketLogActive(true);
+    } else {
+      this._ddp.setSocketLogActive(false);
     }
     this._ddp.connect();
   }

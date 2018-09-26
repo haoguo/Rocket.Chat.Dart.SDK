@@ -23,9 +23,9 @@ void main() {
           ..password = 'admin');
         final channels = await client.getChannelsIn();
         channels.forEach((channel) {
-          client.sub(
-              'stream-room-messages', [channel.id]).listen((a) => print(a));
+          client.subRoomMessages(channel.id);
         });
+        client.roomMessages().listen((data) => print(data.doc));
       }
     });
   });

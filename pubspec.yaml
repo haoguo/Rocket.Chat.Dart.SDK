@@ -7,7 +7,7 @@ environment:
   sdk: ">=1.8.0 <3.0.0"
 
 dependencies:
-  ddp: ^0.0.6
+  ddp: ^0.0.8
   crypto: ^2.0.6
 
 dev_dependencies:
