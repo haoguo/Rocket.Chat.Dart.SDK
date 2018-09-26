@@ -14,7 +14,7 @@ abstract class _ClientSubscriptionsMixin implements _DdpClientWrapper {
     } else {
       this._getDdpClient().sub(name, [args[0], false]);
     }
-    const update = 'update';
+    const update = 'changed';
     StreamController<UpdateEvent> controller = StreamController(sync: false);
     this._getDdpClient().collectionByName(args[0]).addUpdateListener(
         (String collection, String operation, String id,
