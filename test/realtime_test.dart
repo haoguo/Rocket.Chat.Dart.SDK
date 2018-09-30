@@ -21,7 +21,7 @@ void main() {
         await client.login(UserCredentials()
           ..name = 'admin'
           ..password = 'admin');
-        final channels = await client.getChannelSubscriptions();
+        final channels = await client.getChannelsIn();
         channels.forEach((channel) {
           client.subRoomMessages(channel.id);
         });

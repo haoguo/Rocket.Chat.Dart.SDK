@@ -33,7 +33,6 @@ abstract class _ClientChannelsMixin implements _DdpClientWrapper {
       <String, dynamic>{'\$date': 0}
     ]).then((call) {
       List<ChannelSubscription> subscriptions = [];
-      print(call.reply);
       (call.reply['update'] as List<dynamic>).forEach((s) => subscriptions.add(
           ChannelSubscription()
             ..id = '${s['_id']}'
@@ -49,6 +48,7 @@ abstract class _ClientChannelsMixin implements _DdpClientWrapper {
             ..roles = (s['roles'] ?? [])
                 .map<String>((role) => role as String)
                 .toList()));
+      completer.complete(subscriptions);
     }).catchError((error) => completer.completeError(error));
     return completer.future;
   }
