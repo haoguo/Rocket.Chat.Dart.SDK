@@ -64,5 +64,5 @@ class ChannelSubscription {
   String type;
   User user;
   List<String> roles;
-  double unread;
+  int unread;
 }
