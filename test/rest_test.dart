@@ -9,14 +9,14 @@ void main() {
   test('test rest rocket.chat client', () async {
     Client client = Client(
         Uri(
-          scheme: 'https',
-          host: 'chat.tumbo.com.cn',
-          port: 443,
+          scheme: 'http',
+          host: 'localhost',
+          port: 80,
         ),
         true);
     await client.login(UserCredentials()
-      ..name = '3573412799502'
-      ..password = '3573412799502');
+      ..name = 'admin'
+      ..password = 'admin');
     (await client.getPublicChannels())
         .forEach((channel) => print(channel.toJson()));
   });
