@@ -7,9 +7,4 @@ class UserCredentials {
   String email;
   String name;
   String password;
-
-  @override
-  String toString() {
-    return '';
-  }
 }

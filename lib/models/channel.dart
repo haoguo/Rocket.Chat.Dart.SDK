@@ -1,68 +1,90 @@
 part of models;
 
+@JsonSerializable()
 class Channel {
+  Channel();
+
+  @JsonKey(name: '_id')
   String id;
+
+  @JsonKey(name: 'name')
   String name;
+
+  @JsonKey(name: 'fname', includeIfNull: false)
   String fName;
+
+  @JsonKey(name: 't')
   String type;
+
+  @JsonKey(name: 'msgs')
   int msgs;
 
+  @JsonKey(name: 'ro', includeIfNull: false)
   bool readOnly;
+
+  @JsonKey(name: 'sysMes', includeIfNull: false)
   bool sysMes;
+
+  @JsonKey(name: 'default')
   bool isDefault;
+
+  @JsonKey(name: 'broadcast', includeIfNull: false)
   bool broadcast;
 
+  @JsonKey(name: 'ts', includeIfNull: false)
   DateTime timestamp;
+
+  @JsonKey(name: '_updatedAt', includeIfNull: false)
   DateTime updatedAt;
 
+  @JsonKey(name: 'u', includeIfNull: false)
   User user;
+
+  @JsonKey(name: 'lastMessage', includeIfNull: false)
   Message lastMessage;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{
-      '_id': this.id,
-      'name': this.name,
-      't': this.type,
-      'msgs': this.msgs,
-      'default': this.isDefault,
-    };
-    if (this.fName != null && this.fName.isNotEmpty) {
-      map['fname'] = this.fName;
-    }
-    if (this.readOnly != null && !this.readOnly) {
-      map['ro'] = this.readOnly;
-    }
-    if (this.sysMes != null && !this.sysMes) {
-      map['sysMes'] = this.sysMes;
-    }
-    if (this.broadcast != null && !this.broadcast) {
-      map['broadcast'] = this.broadcast;
-    }
-    if (this.timestamp != null) {
-      map['ts'] = this.timestamp;
-    }
-    if (this.updatedAt != null) {
-      map['_updatedAt'] = this.updatedAt;
-    }
-    if (this.user != null) {
-      map['u'] = this.user;
-    }
-    if (this.lastMessage != null) {
-      map['lastMessage'] = this.lastMessage;
-    }
-    return map;
-  }
+  factory Channel.fromJson(Map<String, dynamic> json) =>
+      _$ChannelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChannelToJson(this);
 }
 
+@JsonSerializable()
 class ChannelSubscription {
+  ChannelSubscription();
+
+  @JsonKey(name: '_id')
   String id;
+
+  @JsonKey(name: 'alert')
   bool alert;
+
+  @JsonKey(name: 'name')
   String name;
+
+  @JsonKey(name: 'fname')
   String displayName;
+
+  @JsonKey(name: 'open')
   bool open;
+
+  @JsonKey(name: 'rid')
   String roomId;
+
+  @JsonKey(name: 'c')
   String type;
+
+  @JsonKey(name: 'u')
   User user;
+
+  @JsonKey(name: 'roles')
   List<String> roles;
+
+  @JsonKey(name: 'unread')
   int unread;
+
+  factory ChannelSubscription.fromJson(Map<String, dynamic> json) =>
+      _$ChannelSubscriptionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChannelSubscriptionToJson(this);
 }

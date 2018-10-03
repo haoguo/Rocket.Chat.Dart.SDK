@@ -1,6 +1,9 @@
 part of models;
 
+@JsonSerializable()
 class Message {
+  Message();
+
   String id;
   String roomId;
   String msg;
@@ -13,9 +16,15 @@ class Message {
   User user;
 
   PostMessage postMessage;
+
+  factory Message.fromJson(Map<String, dynamic> json) =>
+      _$MessageFromJson(json);
 }
 
+@JsonSerializable()
 class PostMessage {
+  PostMessage();
+
   String roomId;
   String channel;
   String text;
@@ -24,9 +33,15 @@ class PostMessage {
   String emoji;
   String avatar;
   List<Attachment> attachments;
+
+  factory PostMessage.fromJson(Map<String, dynamic> json) =>
+      _$PostMessageFromJson(json);
 }
 
+@JsonSerializable()
 class Attachment {
+  Attachment();
+
   String color;
   String text;
   String timestamp;
@@ -47,10 +62,19 @@ class Attachment {
   String videoUrl;
 
   List<AttachmentField> fields;
+
+  factory Attachment.fromJson(Map<String, dynamic> json) =>
+      _$AttachmentFromJson(json);
 }
 
+@JsonSerializable()
 class AttachmentField {
+  AttachmentField();
+
   bool short;
   String title;
   String value;
+
+  factory AttachmentField.fromJson(Map<String, dynamic> json) =>
+      _$AttachmentFieldFromJson(json);
 }
