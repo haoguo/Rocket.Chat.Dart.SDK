@@ -19,6 +19,8 @@ class Message {
 
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MessageToJson(this);
 }
 
 @JsonSerializable()
@@ -36,6 +38,8 @@ class PostMessage {
 
   factory PostMessage.fromJson(Map<String, dynamic> json) =>
       _$PostMessageFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PostMessageToJson(this);
 }
 
 @JsonSerializable()
