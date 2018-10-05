@@ -4,15 +4,34 @@ part of models;
 class Message {
   Message();
 
+  @JsonKey(name: '_id')
   String id;
+
+  @JsonKey(name: 'rid')
   String roomId;
+
+  @JsonKey(name: 'msg')
   String msg;
+
+  @JsonKey(name: 'editedBy', includeIfNull: false)
   String editedBy;
+
+  @JsonKey(name: 'groupable', includeIfNull: false)
   bool groupable;
+
+  @JsonKey(name: 'editedAt', includeIfNull: false)
   DateTime editedAt;
+
+  @JsonKey(name: 'ts', includeIfNull: false)
   DateTime timestamp;
+
+  @JsonKey(name: '_updatedAt', includeIfNull: false)
   DateTime updatedAt;
+
+  @JsonKey(name: 'mentions', includeIfNull: false)
   List<User> mentions;
+
+  @JsonKey(name: 'u', includeIfNull: false)
   User user;
 
   PostMessage postMessage;

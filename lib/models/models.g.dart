@@ -103,45 +103,54 @@ Map<String, dynamic> _$PaginationToJson(Pagination instance) =>
 
 Message _$MessageFromJson(Map<String, dynamic> json) {
   return Message()
-    ..id = json['id'] as String
-    ..roomId = json['roomId'] as String
+    ..id = json['_id'] as String
+    ..roomId = json['rid'] as String
     ..msg = json['msg'] as String
     ..editedBy = json['editedBy'] as String
     ..groupable = json['groupable'] as bool
     ..editedAt = json['editedAt'] == null
         ? null
         : DateTime.parse(json['editedAt'] as String)
-    ..timestamp = json['timestamp'] == null
+    ..timestamp =
+        json['ts'] == null ? null : DateTime.parse(json['ts'] as String)
+    ..updatedAt = json['_updatedAt'] == null
         ? null
-        : DateTime.parse(json['timestamp'] as String)
-    ..updatedAt = json['updatedAt'] == null
-        ? null
-        : DateTime.parse(json['updatedAt'] as String)
+        : DateTime.parse(json['_updatedAt'] as String)
     ..mentions = (json['mentions'] as List)
         ?.map(
             (e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..user = json['user'] == null
+    ..user = json['u'] == null
         ? null
-        : User.fromJson(json['user'] as Map<String, dynamic>)
+        : User.fromJson(json['u'] as Map<String, dynamic>)
     ..postMessage = json['postMessage'] == null
         ? null
         : PostMessage.fromJson(json['postMessage'] as Map<String, dynamic>);
 }
 
-Map<String, dynamic> _$MessageToJson(Message instance) => <String, dynamic>{
-      'id': instance.id,
-      'roomId': instance.roomId,
-      'msg': instance.msg,
-      'editedBy': instance.editedBy,
-      'groupable': instance.groupable,
-      'editedAt': instance.editedAt?.toIso8601String(),
-      'timestamp': instance.timestamp?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
-      'mentions': instance.mentions,
-      'user': instance.user,
-      'postMessage': instance.postMessage
-    };
+Map<String, dynamic> _$MessageToJson(Message instance) {
+  var val = <String, dynamic>{
+    '_id': instance.id,
+    'rid': instance.roomId,
+    'msg': instance.msg,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('editedBy', instance.editedBy);
+  writeNotNull('groupable', instance.groupable);
+  writeNotNull('editedAt', instance.editedAt?.toIso8601String());
+  writeNotNull('ts', instance.timestamp?.toIso8601String());
+  writeNotNull('_updatedAt', instance.updatedAt?.toIso8601String());
+  writeNotNull('mentions', instance.mentions);
+  writeNotNull('u', instance.user);
+  val['postMessage'] = instance.postMessage;
+  return val;
+}
 
 PostMessage _$PostMessageFromJson(Map<String, dynamic> json) {
   return PostMessage()
