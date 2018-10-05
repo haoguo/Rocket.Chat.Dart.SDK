@@ -111,9 +111,8 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     ..editedAt = json['editedAt'] == null
         ? null
         : DateTime.parse(json['editedAt'] as String)
-    ..timestamp = json['ts'] == null
-        ? null
-        : _TsFromJson(json['ts'] as Map<String, dynamic>)
+    ..timestamp =
+        json['ts'] == null ? null : DateTime.parse(json['ts'] as String)
     ..updatedAt = json['_updatedAt'] == null
         ? null
         : DateTime.parse(json['_updatedAt'] as String)

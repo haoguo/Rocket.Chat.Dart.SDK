@@ -1,12 +1,5 @@
 part of models;
 
-DateTime _TsFromJson(Map<String, dynamic> json) {
-  if (json['ts'].runtimeType == String) {
-    return DateTime.parse(json['ts'] as String);
-  }
-  return DateTime.fromMillisecondsSinceEpoch(json['ts']['\$date']);
-}
-
 @JsonSerializable()
 class Message {
   Message();
@@ -29,7 +22,7 @@ class Message {
   @JsonKey(name: 'editedAt', includeIfNull: false)
   DateTime editedAt;
 
-  @JsonKey(name: 'ts', includeIfNull: false, fromJson: _TsFromJson)
+  @JsonKey(name: 'ts', includeIfNull: false)
   DateTime timestamp;
 
   @JsonKey(name: '_updatedAt', includeIfNull: false)
