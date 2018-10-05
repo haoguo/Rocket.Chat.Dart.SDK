@@ -4,12 +4,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:rocket_chat_dart/models/models.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:rocket_chat_dart/models/models.dart';
 
 part 'channels.dart';
-part 'users.dart';
 part 'client.g.dart';
+part 'rooms.dart';
+part 'users.dart';
 
 class _AuthInfo {
   _AuthInfo(this._id, this._token);
@@ -25,7 +26,7 @@ abstract class _ClientWrapper {
 }
 
 class Client extends Object
-    with _ClientUsersMixin, _ClientChannelsMixin
+    with _ClientUsersMixin, _ClientChannelsMixin, _ClientRoomsMixin
     implements _ClientWrapper {
   final String protocol;
   final String host;
