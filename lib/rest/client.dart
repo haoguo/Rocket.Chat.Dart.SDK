@@ -8,10 +8,17 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:rocket_chat_dart/models/models.dart';
 
 part 'channels.dart';
+
+part 'chat.dart';
+
 part 'client.g.dart';
+
 part 'im.dart';
+
 part 'rooms.dart';
+
 part 'subscriptions.dart';
+
 part 'users.dart';
 
 class _AuthInfo {
@@ -33,7 +40,8 @@ class Client extends Object
         _ClientChannelsMixin,
         _ClientRoomsMixin,
         _ClientSubscriptionsMixin,
-        _ClientIMMixin
+        _ClientIMMixin,
+        _ClientChatMixin
     implements _ClientWrapper {
   final String protocol;
   final String host;
