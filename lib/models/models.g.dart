@@ -239,18 +239,18 @@ Map<String, dynamic> _$AttachmentFieldToJson(AttachmentField instance) =>
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return User()
-    ..id = json['id'] as String
+    ..id = json['_id'] as String
     ..name = json['name'] as String
-    ..userName = json['userName'] as String
+    ..userName = json['username'] as String
     ..status = json['status'] as String
     ..token = json['token'] as String
     ..tokenExpires = json['tokenExpires'] as int;
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'name': instance.name,
-      'userName': instance.userName,
+      'username': instance.userName,
       'status': instance.status,
       'token': instance.token,
       'tokenExpires': instance.tokenExpires
