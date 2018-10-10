@@ -1,6 +1,6 @@
 name: rocket_chat_dart
 description: n/a
-version: 0.0.16
+version: 0.0.17
 author: haoguo <bard.guo@gmail.com>
 homepage: https://github.com/haoguo/rocket.chat.dart
 environment:

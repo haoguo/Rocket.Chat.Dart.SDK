@@ -2,7 +2,6 @@ part of rest;
 
 @JsonSerializable()
 class ChannelsResponse {
-
   ChannelsResponse();
 
   @JsonKey(name: 'channels')
@@ -21,7 +20,21 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
-      final channelsResponse = ChannelsResponse.fromJson(json.decode(response.body));
+      final channelsResponse =
+          ChannelsResponse.fromJson(json.decode(response.body));
+      completer.complete(channelsResponse.channels);
+    }).catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
+
+  Future<List<Channel>> getPublicChannelsJoined() {
+    Completer<List<Channel>> completer = Completer();
+    http.get('${_getUrl()}/channels.list.joined', headers: {
+      'X-User-Id': _auth._id,
+      'X-Auth-Token': _auth._token,
+    }).then((response) {
+      final channelsResponse =
+          ChannelsResponse.fromJson(json.decode(response.body));
       completer.complete(channelsResponse.channels);
     }).catchError((error) => completer.completeError(error));
     return completer.future;
