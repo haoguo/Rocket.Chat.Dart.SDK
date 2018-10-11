@@ -71,7 +71,7 @@ class ChannelSubscription {
   @JsonKey(name: 'rid')
   String roomId;
 
-  @JsonKey(name: 'c')
+  @JsonKey(name: 't')
   String type;
 
   @JsonKey(name: 'u')
