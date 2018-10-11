@@ -7,6 +7,7 @@ abstract class _ClientSubscriptionsMixin implements _ClientWrapper {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
+      _hackResponseHeader(response);
       final rawRoomsList = json.decode(response.body)['update'] as List;
       final rooms = <ChannelSubscription>[];
       for (var raw in rawRoomsList) {

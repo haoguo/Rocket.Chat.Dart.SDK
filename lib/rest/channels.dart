@@ -20,6 +20,7 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
+      _hackResponseHeader(response);
       final channelsResponse =
           ChannelsResponse.fromJson(json.decode(response.body));
       completer.complete(channelsResponse.channels);
@@ -33,6 +34,7 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
+      _hackResponseHeader(response);
       final channelsResponse =
           ChannelsResponse.fromJson(json.decode(response.body));
       completer.complete(channelsResponse.channels);
