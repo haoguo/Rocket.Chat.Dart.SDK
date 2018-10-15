@@ -31,10 +31,14 @@ class Channel {
   @JsonKey(name: 'broadcast', includeIfNull: false)
   bool broadcast;
 
-  @JsonKey(name: 'ts', includeIfNull: false)
+  @JsonKey(name: 'ts', includeIfNull: false, fromJson: _fromJsonToDateTime)
   DateTime timestamp;
 
-  @JsonKey(name: '_updatedAt', includeIfNull: false)
+  @JsonKey(
+    name: '_updatedAt',
+    includeIfNull: false,
+    fromJson: _fromJsonToDateTime,
+  )
   DateTime updatedAt;
 
   @JsonKey(name: 'u', includeIfNull: false)

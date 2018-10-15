@@ -17,11 +17,10 @@ Channel _$ChannelFromJson(Map<String, dynamic> json) {
     ..sysMes = json['sysMes'] as bool
     ..isDefault = json['default'] as bool
     ..broadcast = json['broadcast'] as bool
-    ..timestamp =
-        json['ts'] == null ? null : DateTime.parse(json['ts'] as String)
+    ..timestamp = json['ts'] == null ? null : _fromJsonToDateTime(json['ts'])
     ..updatedAt = json['_updatedAt'] == null
         ? null
-        : DateTime.parse(json['_updatedAt'] as String)
+        : _fromJsonToDateTime(json['_updatedAt'])
     ..user = json['u'] == null
         ? null
         : User.fromJson(json['u'] as Map<String, dynamic>)
@@ -64,7 +63,7 @@ ChannelSubscription _$ChannelSubscriptionFromJson(Map<String, dynamic> json) {
     ..displayName = json['fname'] as String
     ..open = json['open'] as bool
     ..roomId = json['rid'] as String
-    ..type = json['c'] as String
+    ..type = json['t'] as String
     ..user = json['u'] == null
         ? null
         : User.fromJson(json['u'] as Map<String, dynamic>)
@@ -81,7 +80,7 @@ Map<String, dynamic> _$ChannelSubscriptionToJson(
       'fname': instance.displayName,
       'open': instance.open,
       'rid': instance.roomId,
-      'c': instance.type,
+      't': instance.type,
       'u': instance.user,
       'roles': instance.roles,
       'unread': instance.unread
@@ -111,11 +110,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     ..editedAt = json['editedAt'] == null
         ? null
         : DateTime.parse(json['editedAt'] as String)
-    ..timestamp =
-        json['ts'] == null ? null : DateTime.parse(json['ts'] as String)
+    ..timestamp = json['ts'] == null ? null : _fromJsonToDateTime(json['ts'])
     ..updatedAt = json['_updatedAt'] == null
         ? null
-        : DateTime.parse(json['_updatedAt'] as String)
+        : _fromJsonToDateTime(json['_updatedAt'])
     ..mentions = (json['mentions'] as List)
         ?.map(
             (e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))

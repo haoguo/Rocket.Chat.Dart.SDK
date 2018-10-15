@@ -18,6 +18,16 @@ abstract class _ClientSubscriptionsMixin implements _DdpClientWrapper {
     return completer.future;
   }
 
+  Future<void> subRoomsChanged(String userId) {
+    Completer<void> completer = Completer();
+    this
+        ._getDdpClient()
+        .sub('stream-notify-user', ['$userId/rooms-changed', true])
+        .then((call) => completer.complete(null))
+        .catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
+
   Stream<UpdateEvent> roomMessages() {
     StreamController<UpdateEvent> controller = StreamController();
     this
@@ -30,6 +40,20 @@ abstract class _ClientSubscriptionsMixin implements _DdpClientWrapper {
         ..operation = operation
         ..id = id
         ..doc = doc);
+    });
+    return controller.stream;
+  }
+
+  Stream<Channel> roomsChanged() {
+    StreamController<Channel> controller = StreamController();
+    this
+        ._getDdpClient()
+        .collectionByName('stream-notify-user')
+        .addUpdateListener((collection, opeartion, id, doc) {
+      if (doc['eventName'].endsWith('rooms-changed')) {
+        print(doc['args']);
+        controller.add(Channel.fromJson(doc['args'][1]));
+      }
     });
     return controller.stream;
   }

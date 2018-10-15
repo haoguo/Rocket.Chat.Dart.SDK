@@ -22,10 +22,11 @@ class Message {
   @JsonKey(name: 'editedAt', includeIfNull: false)
   DateTime editedAt;
 
-  @JsonKey(name: 'ts', includeIfNull: false)
+  @JsonKey(name: 'ts', includeIfNull: false, fromJson: _fromJsonToDateTime)
   DateTime timestamp;
 
-  @JsonKey(name: '_updatedAt', includeIfNull: false)
+  @JsonKey(
+      name: '_updatedAt', includeIfNull: false, fromJson: _fromJsonToDateTime)
   DateTime updatedAt;
 
   @JsonKey(name: 'mentions', includeIfNull: false)
