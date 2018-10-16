@@ -10,6 +10,7 @@ import 'package:rocket_chat_dart/models/models.dart';
 part 'channels.dart';
 part 'chat.dart';
 part 'client.g.dart';
+part 'groups.dart';
 part 'im.dart';
 part 'rooms.dart';
 part 'subscriptions.dart';
@@ -40,7 +41,8 @@ class Client extends Object
         _ClientRoomsMixin,
         _ClientSubscriptionsMixin,
         _ClientIMMixin,
-        _ClientChatMixin
+        _ClientChatMixin,
+        _ClientGroupsMixin
     implements _ClientWrapper {
   final String protocol;
   final String host;
