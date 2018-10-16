@@ -121,6 +121,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     ..user = json['u'] == null
         ? null
         : User.fromJson(json['u'] as Map<String, dynamic>)
+    ..attachments = (json['attachments'] as List)
+        ?.map((e) =>
+            e == null ? null : Attachment.fromJson(e as Map<String, dynamic>))
+        ?.toList()
     ..postMessage = json['postMessage'] == null
         ? null
         : PostMessage.fromJson(json['postMessage'] as Map<String, dynamic>);
@@ -146,7 +150,8 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('_updatedAt', instance.updatedAt?.toIso8601String());
   writeNotNull('mentions', instance.mentions);
   writeNotNull('u', instance.user);
-  val['postMessage'] = instance.postMessage;
+  writeNotNull('attachments', instance.attachments);
+  writeNotNull('postMessage', instance.postMessage);
   return val;
 }
 
@@ -165,17 +170,25 @@ PostMessage _$PostMessageFromJson(Map<String, dynamic> json) {
         ?.toList();
 }
 
-Map<String, dynamic> _$PostMessageToJson(PostMessage instance) =>
-    <String, dynamic>{
-      'roomId': instance.roomId,
-      'channel': instance.channel,
-      'text': instance.text,
-      'parseUrls': instance.parseUrls,
-      'alias': instance.alias,
-      'emoji': instance.emoji,
-      'avatar': instance.avatar,
-      'attachments': instance.attachments
-    };
+Map<String, dynamic> _$PostMessageToJson(PostMessage instance) {
+  var val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('roomId', instance.roomId);
+  writeNotNull('channel', instance.channel);
+  writeNotNull('text', instance.text);
+  writeNotNull('parseUrls', instance.parseUrls);
+  writeNotNull('alias', instance.alias);
+  writeNotNull('emoji', instance.emoji);
+  writeNotNull('avatar', instance.avatar);
+  val['attachments'] = instance.attachments;
+  return val;
+}
 
 Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
   return Attachment()
@@ -201,25 +214,33 @@ Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
         ?.toList();
 }
 
-Map<String, dynamic> _$AttachmentToJson(Attachment instance) =>
-    <String, dynamic>{
-      'color': instance.color,
-      'text': instance.text,
-      'timestamp': instance.timestamp,
-      'thumbUrl': instance.thumbUrl,
-      'messageLink': instance.messageLink,
-      'collapsed': instance.collapsed,
-      'authorName': instance.authorName,
-      'authorLink': instance.authorLink,
-      'authorIcon': instance.authorIcon,
-      'title': instance.title,
-      'titleLink': instance.titleLink,
-      'titleLinkDownload': instance.titleLinkDownload,
-      'imageUrl': instance.imageUrl,
-      'audioUrl': instance.audioUrl,
-      'videoUrl': instance.videoUrl,
-      'fields': instance.fields
-    };
+Map<String, dynamic> _$AttachmentToJson(Attachment instance) {
+  var val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('color', instance.color);
+  writeNotNull('text', instance.text);
+  writeNotNull('timestamp', instance.timestamp);
+  writeNotNull('thumbUrl', instance.thumbUrl);
+  writeNotNull('messageLink', instance.messageLink);
+  writeNotNull('collapsed', instance.collapsed);
+  writeNotNull('authorName', instance.authorName);
+  writeNotNull('authorLink', instance.authorLink);
+  writeNotNull('authorIcon', instance.authorIcon);
+  writeNotNull('title', instance.title);
+  writeNotNull('titleLink', instance.titleLink);
+  writeNotNull('titleLinkDownload', instance.titleLinkDownload);
+  writeNotNull('imageUrl', instance.imageUrl);
+  writeNotNull('audioUrl', instance.audioUrl);
+  writeNotNull('videoUrl', instance.videoUrl);
+  val['fields'] = instance.fields;
+  return val;
+}
 
 AttachmentField _$AttachmentFieldFromJson(Map<String, dynamic> json) {
   return AttachmentField()
