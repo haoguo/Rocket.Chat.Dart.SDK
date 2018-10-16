@@ -35,6 +35,10 @@ class Message {
   @JsonKey(name: 'u', includeIfNull: false)
   User user;
 
+  @JsonKey(name: 'attachments', includeIfNull: false)
+  List<Attachment> attachments;
+
+  @JsonKey(includeIfNull: false)
   PostMessage postMessage;
 
   factory Message.fromJson(Map<String, dynamic> json) =>
@@ -47,12 +51,19 @@ class Message {
 class PostMessage {
   PostMessage();
 
+  @JsonKey(includeIfNull: false)
   String roomId;
+  @JsonKey(includeIfNull: false)
   String channel;
+  @JsonKey(includeIfNull: false)
   String text;
+  @JsonKey(includeIfNull: false)
   bool parseUrls;
+  @JsonKey(includeIfNull: false)
   String alias;
+  @JsonKey(includeIfNull: false)
   String emoji;
+  @JsonKey(includeIfNull: false)
   String avatar;
   List<Attachment> attachments;
 
@@ -66,29 +77,47 @@ class PostMessage {
 class Attachment {
   Attachment();
 
+  @JsonKey(includeIfNull: false)
   String color;
+  @JsonKey(includeIfNull: false)
   String text;
+  @JsonKey(includeIfNull: false)
   String timestamp;
+  @JsonKey(includeIfNull: false)
   String thumbUrl;
+  @JsonKey(includeIfNull: false)
   String messageLink;
+  @JsonKey(includeIfNull: false)
   bool collapsed;
 
+  @JsonKey(includeIfNull: false)
   String authorName;
+  @JsonKey(includeIfNull: false)
   String authorLink;
+  @JsonKey(includeIfNull: false)
   String authorIcon;
 
+  @JsonKey(includeIfNull: false)
   String title;
+  @JsonKey(includeIfNull: false)
   String titleLink;
+  @JsonKey(includeIfNull: false)
   String titleLinkDownload;
 
+  @JsonKey(includeIfNull: false)
   String imageUrl;
+  @JsonKey(includeIfNull: false)
   String audioUrl;
+  @JsonKey(includeIfNull: false)
   String videoUrl;
 
+  @JsonKey(includeIfNull: false)
   List<AttachmentField> fields;
 
   factory Attachment.fromJson(Map<String, dynamic> json) =>
       _$AttachmentFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AttachmentToJson(this);
 }
 
 @JsonSerializable()
@@ -101,4 +130,6 @@ class AttachmentField {
 
   factory AttachmentField.fromJson(Map<String, dynamic> json) =>
       _$AttachmentFieldFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AttachmentFieldToJson(this);
 }
