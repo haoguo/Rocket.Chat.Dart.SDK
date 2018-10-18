@@ -238,7 +238,7 @@ Map<String, dynamic> _$AttachmentToJson(Attachment instance) {
   writeNotNull('imageUrl', instance.imageUrl);
   writeNotNull('audioUrl', instance.audioUrl);
   writeNotNull('videoUrl', instance.videoUrl);
-  val['fields'] = instance.fields;
+  writeNotNull('fields', instance.fields);
   return val;
 }
 
