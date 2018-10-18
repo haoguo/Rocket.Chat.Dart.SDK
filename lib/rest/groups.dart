@@ -143,4 +143,30 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
     }).catchError((error) => completer.completeError(error));
     return completer.future;
   }
+
+  Future<List<User>> groupMembers(
+    String roomId, {
+    int offset,
+    int count,
+  }) {
+    Completer<List<User>> completer = Completer();
+    StringBuffer query = StringBuffer('roomId=$roomId');
+    if (offset != null) {
+      query.write('&offset=$offset');
+    }
+    if (count != null) {
+      query.write('&count=$count');
+    }
+    http
+        .get('${_getUrl()}/groups.members?${query.toString()}')
+        .then((response) {
+      _hackResponseHeader(response);
+      final rawResponse = json.decode(response.body);
+      final users = (rawResponse['members'] as List)
+          .map<User>((u) => User.fromJson(u))
+          .toList();
+      completer.complete(users);
+    }).catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
 }
