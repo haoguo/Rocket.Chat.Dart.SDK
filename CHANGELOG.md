@@ -1,3 +1,16 @@
+## 0.0.28 (2018-10-21)
+
+### Features:
+
+* Fulfill description of pubspec.yaml
+
+
+## 0.0.27 (2018-10-21)
+
+### Features:
+
+* Fulfill **README.md**
+
 ## 0.0.26 (2018-10-21)
 
 ### Features:
