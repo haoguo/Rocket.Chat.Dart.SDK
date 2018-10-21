@@ -157,9 +157,10 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
     if (count != null) {
       query.write('&count=$count');
     }
-    http
-        .get('${_getUrl()}/groups.members?${query.toString()}')
-        .then((response) {
+    http.get('${_getUrl()}/groups.members?${query.toString()}', headers: {
+      'X-User-Id': _auth._id,
+      'X-Auth-Token': _auth._token,
+    }).then((response) {
       _hackResponseHeader(response);
       final rawResponse = json.decode(response.body);
       final users = (rawResponse['members'] as List)
