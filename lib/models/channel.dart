@@ -41,6 +41,9 @@ class Channel {
   )
   DateTime updatedAt;
 
+  @JsonKey(name: 'topic')
+  String topic;
+
   @JsonKey(name: 'u', includeIfNull: false)
   User user;
 

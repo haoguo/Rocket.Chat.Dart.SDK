@@ -21,6 +21,7 @@ Channel _$ChannelFromJson(Map<String, dynamic> json) {
     ..updatedAt = json['_updatedAt'] == null
         ? null
         : _fromJsonToDateTime(json['_updatedAt'])
+    ..topic = json['topic'] as String
     ..user = json['u'] == null
         ? null
         : User.fromJson(json['u'] as Map<String, dynamic>)
@@ -50,6 +51,7 @@ Map<String, dynamic> _$ChannelToJson(Channel instance) {
   writeNotNull('broadcast', instance.broadcast);
   writeNotNull('ts', instance.timestamp?.toIso8601String());
   writeNotNull('_updatedAt', instance.updatedAt?.toIso8601String());
+  val['topic'] = instance.topic;
   writeNotNull('u', instance.user);
   writeNotNull('lastMessage', instance.lastMessage);
   return val;
