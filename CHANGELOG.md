@@ -1,3 +1,10 @@
+## 0.0.29 (2018-10-21)
+
+### Features:
+
+* Update description of pubspec.yaml
+
+
 ## 0.0.28 (2018-10-21)
 
 ### Features:

@@ -1,6 +1,6 @@
 name: rocket_chat_dart
-description: Similar to Rocket.Chat.Go.SDK and implement APIs according to the Rocket Chat document. This SDK could be use in both in server side and in flutter. Not sure that this works or not in the browser.
-version: 0.0.28
+description: Similar to Rocket.Chat.Go.SDK and implement APIs according to the Rocket Chat document.
+version: 0.0.29
 author: haoguo <bard.guo@gmail.com>
 homepage: https://github.com/haoguo/rocket.chat.dart
 environment:
