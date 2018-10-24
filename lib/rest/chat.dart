@@ -16,7 +16,7 @@ abstract class _ClientChatMixin implements _ClientWrapper {
         .then((response) {
       _hackResponseHeader(response);
       final raw = json.decode(response.body)['message'];
-      completer.complete(Message.fromJson(json.decode(raw)));
+      completer.complete(Message.fromJson(raw));
     }).catchError((error) => completer.completeError(error));
     return completer.future;
   }

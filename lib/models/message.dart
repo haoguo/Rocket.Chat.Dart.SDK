@@ -25,6 +25,9 @@ class Message {
   @JsonKey(name: 'ts', includeIfNull: false, fromJson: _fromJsonToDateTime)
   DateTime timestamp;
 
+  @JsonKey(name: 't')
+  String type;
+
   @JsonKey(
       name: '_updatedAt', includeIfNull: false, fromJson: _fromJsonToDateTime)
   DateTime updatedAt;

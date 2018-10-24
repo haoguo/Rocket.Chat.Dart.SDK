@@ -1,3 +1,12 @@
+## 0.0.30 (2018-10-24)
+
+### Feature:
+
+* Add type for messsage
+* Fix send message response error
+* Leave group response change to void
+
+
 ## 0.0.29 (2018-10-21)
 
 ### Features:

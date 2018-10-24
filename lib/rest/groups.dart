@@ -125,8 +125,8 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
     return completer.future;
   }
 
-  Future<Channel> groupsLeave(String roomId) {
-    Completer<Channel> completer = Completer();
+  Future<void> groupsLeave(String roomId) {
+    Completer<void> completer = Completer();
     http
         .post('${_getUrl()}/groups.leave',
             headers: {
@@ -139,7 +139,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
             }))
         .then((response) {
       _hackResponseHeader(response);
-      completer.complete(Channel.fromJson(json.decode(response.body)['group']));
+      completer.complete((void val) => completer.complete(null));
     }).catchError((error) => completer.completeError(error));
     return completer.future;
   }

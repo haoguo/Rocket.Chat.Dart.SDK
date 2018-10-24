@@ -113,6 +113,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['editedAt'] as String)
     ..timestamp = json['ts'] == null ? null : _fromJsonToDateTime(json['ts'])
+    ..type = json['t'] as String
     ..updatedAt = json['_updatedAt'] == null
         ? null
         : _fromJsonToDateTime(json['_updatedAt'])
@@ -149,6 +150,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('groupable', instance.groupable);
   writeNotNull('editedAt', instance.editedAt?.toIso8601String());
   writeNotNull('ts', instance.timestamp?.toIso8601String());
+  val['t'] = instance.type;
   writeNotNull('_updatedAt', instance.updatedAt?.toIso8601String());
   writeNotNull('mentions', instance.mentions);
   writeNotNull('u', instance.user);
