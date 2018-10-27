@@ -130,7 +130,13 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
         ?.toList()
     ..postMessage = json['postMessage'] == null
         ? null
-        : PostMessage.fromJson(json['postMessage'] as Map<String, dynamic>);
+        : PostMessage.fromJson(json['postMessage'] as Map<String, dynamic>)
+    ..reactions = (json['reactions'] as Map<String, dynamic>)?.map((k, e) =>
+        MapEntry(
+            k,
+            e == null
+                ? null
+                : ReactionItem.fromJson(e as Map<String, dynamic>)));
 }
 
 Map<String, dynamic> _$MessageToJson(Message instance) {
@@ -156,8 +162,18 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('u', instance.user);
   writeNotNull('attachments', instance.attachments);
   writeNotNull('postMessage', instance.postMessage);
+  writeNotNull('reactions', instance.reactions);
   return val;
 }
+
+ReactionItem _$ReactionItemFromJson(Map<String, dynamic> json) {
+  return ReactionItem()
+    ..usernames =
+        (json['usernames'] as List)?.map((e) => e as String)?.toList();
+}
+
+Map<String, dynamic> _$ReactionItemToJson(ReactionItem instance) =>
+    <String, dynamic>{'usernames': instance.usernames};
 
 PostMessage _$PostMessageFromJson(Map<String, dynamic> json) {
   return PostMessage()

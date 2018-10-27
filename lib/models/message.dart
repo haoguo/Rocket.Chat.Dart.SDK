@@ -44,10 +44,24 @@ class Message {
   @JsonKey(includeIfNull: false)
   PostMessage postMessage;
 
+  @JsonKey(name: 'reactions', includeIfNull: false)
+  Map<String, ReactionItem> reactions;
+
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
 
   Map<String, dynamic> toJson() => _$MessageToJson(this);
+}
+
+@JsonSerializable()
+class ReactionItem {
+  ReactionItem();
+
+  @JsonKey(name: 'usernames')
+  List<String> usernames;
+
+  factory ReactionItem.fromJson(Map<String, dynamic> json) =>
+      _$ReactionItemFromJson(json);
 }
 
 @JsonSerializable()
