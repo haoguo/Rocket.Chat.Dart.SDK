@@ -2,6 +2,13 @@
 
 ### Feature:
 
+* Add channels api
+
+
+## 0.0.31 (2018-10-27)
+
+### Feature:
+
 * Add react message.
 * Add Message's *reactions* fields
 
