@@ -111,7 +111,7 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
   Future<Channel> channelsInvite(String roomId, String userId) {
     Completer<Channel> completer = Completer();
     http
-        .post('${_getUrl()}/groups.invite',
+        .post('${_getUrl()}/channels.invite',
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
@@ -123,7 +123,8 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
             }))
         .then((response) {
       _hackResponseHeader(response);
-      completer.complete(Channel.fromJson(json.decode(response.body)['group']));
+      completer
+          .complete(Channel.fromJson(json.decode(response.body)['channel']));
     }).catchError((error) => completer.completeError(error));
     return completer.future;
   }
@@ -131,7 +132,7 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
   Future<Channel> channelsKick(String roomId, String userId) {
     Completer<Channel> completer = Completer();
     http
-        .post('${_getUrl()}/groups.kick',
+        .post('${_getUrl()}/channels.kick',
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
@@ -143,7 +144,8 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
             }))
         .then((response) {
       _hackResponseHeader(response);
-      completer.complete(Channel.fromJson(json.decode(response.body)['group']));
+      completer
+          .complete(Channel.fromJson(json.decode(response.body)['channel']));
     }).catchError((error) => completer.completeError(error));
     return completer.future;
   }
@@ -151,7 +153,7 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
   Future<void> channelsLeave(String roomId) {
     Completer<void> completer = Completer();
     http
-        .post('${_getUrl()}/groups.leave',
+        .post('${_getUrl()}/channels.leave',
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,

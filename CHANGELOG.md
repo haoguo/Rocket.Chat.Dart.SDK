@@ -1,3 +1,10 @@
+## 0.0.34 (2018-11-7)
+
+### Feature:
+
+* Fix realtime channel api wrong url
+
+
 ## 0.0.33 (2018-11-7)
 
 ### Feature:
