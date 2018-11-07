@@ -181,4 +181,40 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
         .catchError((error) => completer.completeError(error));
     return completer.future;
   }
+
+  Future<List<User>> channelMembers({
+    String roomId,
+    String roomName,
+    int offset,
+    int count,
+  }) {
+    Completer<List<User>> completer = Completer();
+    StringBuffer query;
+    if (roomId != null) {
+      query = StringBuffer('roomId=$roomId');
+    } else if (roomName != null) {
+      query = StringBuffer('roomName=$roomName');
+    } else {
+      completer
+          .completeError('RoomId And RoomName cannot be null at the same time');
+    }
+    if (offset != null) {
+      query.write('&offset=$offset');
+    }
+    if (count != null) {
+      query.write('&count=$count');
+    }
+    http.get('${_getUrl()}/channels.members?${query.toString()}', headers: {
+      'X-User-Id': _auth._id,
+      'X-Auth-Token': _auth._token,
+    }).then((response) {
+      _hackResponseHeader(response);
+      final rawResponse = json.decode(response.body);
+      final users = (rawResponse['members'] as List)
+          .map<User>((u) => User.fromJson(u))
+          .toList();
+      completer.complete(users);
+    }).catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
 }

@@ -1,6 +1,6 @@
 name: rocket_chat_dart
 description: Similar to Rocket.Chat.Go.SDK and implement APIs according to the Rocket Chat document.
-version: 0.0.32
+version: 0.0.33
 author: haoguo <bard.guo@gmail.com>
 homepage: https://github.com/haoguo/rocket.chat.dart
 environment:
