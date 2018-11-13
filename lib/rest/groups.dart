@@ -170,4 +170,18 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
     }).catchError((error) => completer.completeError(error));
     return completer.future;
   }
+
+  Future<List<Channel>> listGroups() {
+    Completer<List<Channel>> completer = Completer();
+    http.get('${_getUrl()}/groups.list', headers: {
+      'X-User-Id': _auth._id,
+      'X-Auth-Token': _auth._token,
+    }).then((response) {
+      _hackResponseHeader(response);
+      final ims = json.decode(response.body)['groups'] as List;
+      final list = ims.map<Channel>((im) => Channel.fromJson(im)).toList();
+      completer.complete(list);
+    }).catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
 }

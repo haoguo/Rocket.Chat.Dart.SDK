@@ -60,4 +60,18 @@ abstract class _ClientIMMixin implements _ClientWrapper {
     }).catchError((error) => completer.completeError(error));
     return completer.future;
   }
+
+  Future<List<Channel>> listIMs() {
+    Completer<List<Channel>> completer = Completer();
+    http.get('${_getUrl()}/im.list', headers: {
+      'X-User-Id': _auth._id,
+      'X-Auth-Token': _auth._token,
+    }).then((response) {
+      _hackResponseHeader(response);
+      final ims = json.decode(response.body)['ims'] as List;
+      final list = ims.map<Channel>((im) => Channel.fromJson(im)).toList();
+      completer.complete(list);
+    }).catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
 }

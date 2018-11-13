@@ -1,3 +1,17 @@
+## 0.0.35 (2018-11-13)
+
+### Feature:
+
+* Add list groups and ims
+
+
+## 0.0.34 (2018-11-7)
+
+### Feature:
+
+* Fix realtime channel api wrong url
+
+
 ## 0.0.34 (2018-11-7)
 
 ### Feature:
