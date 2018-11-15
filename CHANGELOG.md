@@ -1,3 +1,10 @@
+## 0.0.36 (2018-11-13)
+
+### Feature:
+
+* Add [getSubscriptionOne](https://rocket.chat/docs/developer-guides/rest-api/subscriptions/getone/)
+
+
 ## 0.0.35 (2018-11-13)
 
 ### Feature:

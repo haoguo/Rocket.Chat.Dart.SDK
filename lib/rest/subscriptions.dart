@@ -18,6 +18,24 @@ abstract class _ClientSubscriptionsMixin implements _ClientWrapper {
     return completer.future;
   }
 
+  Future<ChannelSubscription> getSubscriptionsOne(String roomId) {
+    Completer<ChannelSubscription> completer = Completer();
+    http.get('${_getUrl()}/subscriptions.getOne?roomId=$roomId', headers: {
+      'X-User-Id': _auth._id,
+      'X-Auth-Token': _auth._token,
+    }).then((response) {
+      _hackResponseHeader(response);
+      final rawBody = json.decode(response.body)['subscription'];
+      if (rawBody == null) {
+        completer.complete(null);
+      } else {
+        final subscription = ChannelSubscription.fromJson(rawBody);
+        completer.complete(subscription);
+      }
+    }).catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
+
   Future<void> markAsRead(String rid) {
     Completer<void> completer = Completer();
     http
