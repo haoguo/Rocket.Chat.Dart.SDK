@@ -1,3 +1,10 @@
+## 0.0.37 (2018-11-17)
+
+* Add [Channels close](https://rocket.chat/docs/developer-guides/rest-api/channels/close/)
+* Add API for unsub a channel's messages.
+* Update ddp client to version 0.0.9.
+
+
 ## 0.0.36 (2018-11-13)
 
 ### Feature:

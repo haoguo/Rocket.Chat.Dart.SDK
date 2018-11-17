@@ -184,6 +184,20 @@ abstract class _ClientChannelsMixin implements _ClientWrapper {
     return completer.future;
   }
 
+  Future<void> channelsClose(String roomId) {
+    Completer<void> completer = Completer();
+    final headers = {
+      'X-User-Id': _auth._id,
+      'X-Auth-Token': _auth._token,
+      'Content-Type': 'application/json',
+    };
+    final body = json.encode(<String, dynamic>{'roomId': roomId});
+    http.post('${_getUrl()}/channelsClose', headers: headers, body: body)
+      .then((response) => completer.complete(null))
+      .catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
+
   Future<List<User>> channelMembers({
     String roomId,
     String roomName,

@@ -8,13 +8,22 @@ class UpdateEvent {
 }
 
 abstract class _ClientSubscriptionsMixin implements _DdpClientWrapper {
-  Future<void> subRoomMessages(String name) {
-    Completer<void> completer = Completer();
+  Future<String> subRoomMessages(String name) {
+    Completer<String> completer = Completer();
     this
         ._getDdpClient()
         .sub('stream-room-messages', [name, true])
-        .then((call) => completer.complete(null))
+        .then((call) => completer.complete(call.id))
         .catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
+
+  Future<void> unSubRoomMessages(String subId) {
+    Completer<void> completer = Completer();
+    this._getDdpClient()
+      .unSub(subId)
+      .then((call) => completer.complete(call))
+      .catchError((error) => completer.completeError(error));
     return completer.future;
   }
 
