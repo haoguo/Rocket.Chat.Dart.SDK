@@ -1,3 +1,8 @@
+## 0.0.38 (2018-12-09)
+
+* Upgrade dependency and refine them.
+
+
 ## 0.0.37 (2018-11-17)
 
 * Add [Channels close](https://rocket.chat/docs/developer-guides/rest-api/channels/close/)
