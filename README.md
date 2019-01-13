@@ -10,5 +10,7 @@ https://pub.dartlang.org/packages/rocket_chat_dart
 
 ## Usage
 
-* Add **rocket_chat_dart** to your pubspec.yaml file's dependency.
-* run `pub get` or `flutter packages get`
+- Add **rocket_chat_dart** to your pubspec.yaml file's dependency.
+- run `pub get` or `flutter packages get`
+
+To regenerate code run `flutter packages pub run build_runner build`

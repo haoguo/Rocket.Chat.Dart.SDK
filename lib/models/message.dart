@@ -1,6 +1,22 @@
 part of models;
 
 @JsonSerializable()
+class RoomMessageHistory {
+  RoomMessageHistory();
+
+  @JsonKey(name: 'unreadNotLoaded')
+  int unreadNotLoaded;
+
+  @JsonKey(name: 'messages')
+  List<Message> messages;
+
+  factory RoomMessageHistory.fromJson(Map<String, dynamic> json) =>
+      _$RoomMessageHistoryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RoomMessageHistoryToJson(this);
+}
+
+@JsonSerializable()
 class Message {
   Message();
 

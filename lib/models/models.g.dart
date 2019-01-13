@@ -31,7 +31,7 @@ Channel _$ChannelFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ChannelToJson(Channel instance) {
-  var val = <String, dynamic>{
+  final val = <String, dynamic>{
     '_id': instance.id,
     'name': instance.name,
   };
@@ -102,6 +102,21 @@ Map<String, dynamic> _$PaginationToJson(Pagination instance) =>
       'total': instance.total
     };
 
+RoomMessageHistory _$RoomMessageHistoryFromJson(Map<String, dynamic> json) {
+  return RoomMessageHistory()
+    ..unreadNotLoaded = json['unreadNotLoaded'] as int
+    ..messages = (json['messages'] as List)
+        ?.map((e) =>
+            e == null ? null : Message.fromJson(e as Map<String, dynamic>))
+        ?.toList();
+}
+
+Map<String, dynamic> _$RoomMessageHistoryToJson(RoomMessageHistory instance) =>
+    <String, dynamic>{
+      'unreadNotLoaded': instance.unreadNotLoaded,
+      'messages': instance.messages
+    };
+
 Message _$MessageFromJson(Map<String, dynamic> json) {
   return Message()
     ..id = json['_id'] as String
@@ -140,7 +155,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$MessageToJson(Message instance) {
-  var val = <String, dynamic>{
+  final val = <String, dynamic>{
     '_id': instance.id,
     'rid': instance.roomId,
     'msg': instance.msg,
@@ -191,7 +206,7 @@ PostMessage _$PostMessageFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PostMessageToJson(PostMessage instance) {
-  var val = <String, dynamic>{};
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -235,7 +250,7 @@ Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$AttachmentToJson(Attachment instance) {
-  var val = <String, dynamic>{};
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {

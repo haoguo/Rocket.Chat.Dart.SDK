@@ -19,3 +19,9 @@ DateTime _fromJsonToDateTime(dynamic field) {
   }
   return null;
 }
+
+Map<String, int> DateTimeToMap(DateTime dt) {
+  var r = Map<String, int>();
+  r["\$date"] = dt.millisecondsSinceEpoch;
+  return r;
+}
