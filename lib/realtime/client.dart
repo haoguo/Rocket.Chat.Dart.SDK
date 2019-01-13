@@ -42,7 +42,7 @@ class Client extends Object
     if (uri.port != null) {
       port = uri.port;
     }
-    wsUrl = '$wsUrl://${uri.host}:$port/websocket';
+    wsUrl = '$wsUrl://${uri.host}:$port${uri.path}/websocket';
     this._ddp = ddp.DdpClient(name, wsUrl, uri.toString());
     if (debug) {
       this._ddp.setSocketLogActive(true);
