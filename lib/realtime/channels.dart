@@ -38,6 +38,7 @@ abstract class _ClientChannelsMixin implements _DdpClientWrapper {
             ..id = '${s['_id']}'
             ..alert = s['alert']
             ..name = '${s['name']}'
+            ..roomId = '${s['rid']}'
             ..displayName = '${s['fname']}'
             ..open = s['open']
             ..type = '${s['t']}'

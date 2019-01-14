@@ -46,6 +46,7 @@ class Client extends Object
     implements _ClientWrapper {
   final String protocol;
   final String host;
+  final String path;
   final int port;
   final String version;
 
@@ -58,8 +59,9 @@ class Client extends Object
       : this.protocol = uri.scheme,
         this.host = uri.host,
         this.port = uri.port,
+        this.path = uri.path,
         this.version = 'v1';
 
   @override
-  String _getUrl() => '$protocol://$host:$port/api/$version';
+  String _getUrl() => '$protocol://$host:$port$path/api/$version';
 }

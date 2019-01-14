@@ -114,34 +114,34 @@ class Attachment {
   String color;
   @JsonKey(includeIfNull: false)
   String text;
-  @JsonKey(includeIfNull: false)
-  String timestamp;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'ts', includeIfNull: false, fromJson: _fromJsonToDateTime)
+  DateTime timestamp;
+  @JsonKey(name: 'thumb_url', includeIfNull: false)
   String thumbUrl;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'message_link', includeIfNull: false)
   String messageLink;
   @JsonKey(includeIfNull: false)
   bool collapsed;
 
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'author_name', includeIfNull: false)
   String authorName;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'author_link', includeIfNull: false)
   String authorLink;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'author_icon', includeIfNull: false)
   String authorIcon;
 
   @JsonKey(includeIfNull: false)
   String title;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'title_link', includeIfNull: false)
   String titleLink;
-  @JsonKey(includeIfNull: false)
-  String titleLinkDownload;
+  @JsonKey(name: 'title_link_download', includeIfNull: false)
+  bool titleLinkDownload;
 
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'image_url', includeIfNull: false)
   String imageUrl;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'audio_url', includeIfNull: false)
   String audioUrl;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'video_url', includeIfNull: false)
   String videoUrl;
 
   @JsonKey(includeIfNull: false)

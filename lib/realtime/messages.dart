@@ -24,11 +24,11 @@ abstract class _ClientMessagesMixin implements _DdpClientWrapper {
     return completer.future;
   }
 
-  Future<Message> sendMessage(Channel channel, String text) {
+  Future<Message> sendMessage(String roomId, String text) {
     Completer<Message> completer = Completer();
     final message = Message()
       ..id = _randomId()
-      ..roomId = channel.id
+      ..roomId = roomId
       ..msg = text;
     this
         ._getDdpClient()
