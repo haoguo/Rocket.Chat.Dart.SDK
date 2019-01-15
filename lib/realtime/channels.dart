@@ -21,7 +21,8 @@ abstract class _ClientChannelsMixin implements _DdpClientWrapper {
           .forEach((chan) => channels.add(Channel()
             ..id = '${chan['_id']}'
             ..name = '${chan['name']}'
-            ..type = '${chan['t']}'));
+            ..type = '${chan['t']}'
+            ..lastMessage = Message.fromJson(chan['lastMessage'])));
       completer.complete(channels);
     }).catchError((error) => completer.completeError(error));
     return completer.future;
