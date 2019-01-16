@@ -8,7 +8,7 @@ abstract class _ClientMessagesMixin implements _DdpClientWrapper {
   Future<RoomMessageHistory> loadHistory(
     String roomId, {
     DateTime timestamp,
-    int quantity,
+    int quantity = 50,
   }) {
     Completer<RoomMessageHistory> completer = Completer();
     this
@@ -16,7 +16,7 @@ abstract class _ClientMessagesMixin implements _DdpClientWrapper {
         .call('loadHistory', [
           roomId,
           timestamp != null ? DateTimeToMap(timestamp) : null,
-          quantity
+          quantity,
         ])
         .then((call) =>
             completer.complete(RoomMessageHistory.fromJson(call.reply)))
