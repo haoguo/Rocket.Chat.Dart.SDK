@@ -17,11 +17,14 @@ abstract class _ClientChannelsMixin implements _DdpClientWrapper {
       <String, dynamic>{"\$date": 0}
     ]).then((call) {
       List<Channel> channels = [];
-      (call.reply['update'] as List<dynamic>)
-          .forEach((chan) => channels.add(Channel()
+      (call.reply['update'] as List<dynamic>).forEach((chan) => channels.add(
+          Channel()
             ..id = '${chan['_id']}'
             ..name = '${chan['name']}'
-            ..type = '${chan['t']}'));
+            ..type = '${chan['t']}'
+            ..lastMessage = chan['lastMessage'] == null
+                ? null
+                : Message.fromJson(chan['lastMessage'])));
       completer.complete(channels);
     }).catchError((error) => completer.completeError(error));
     return completer.future;
@@ -38,6 +41,7 @@ abstract class _ClientChannelsMixin implements _DdpClientWrapper {
             ..id = '${s['_id']}'
             ..alert = s['alert']
             ..name = '${s['name']}'
+            ..roomId = '${s['rid']}'
             ..displayName = '${s['fname']}'
             ..open = s['open']
             ..type = '${s['t']}'
