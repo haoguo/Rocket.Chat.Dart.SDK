@@ -25,13 +25,16 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
     this._auth = _AuthInfo(credentials.id, credentials.token);
   }
 
-  Future<dynamic> savePushToken(
+  // savePushToken stores a push token and returns its id
+  Future<String> savePushToken(
       String id, String token, String type, String appName) {
-    Completer<dynamic> completer = Completer();
+    Completer<String> completer = Completer();
     http
         .post('${_getUrl()}/push.token',
             headers: {
               'Content-Type': 'application/json',
+              'X-User-Id': _auth._id,
+              'X-Auth-Token': _auth._token,
             },
             body: json.encode(<String, String>{
               'id': id,
@@ -41,7 +44,7 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
             }))
         .then((response) {
       _hackResponseHeader(response);
-      final data = json.decode(response.body)['data'];
+      final data = json.decode(response.body)['result']['_id'];
       completer.complete(data);
     }).catchError((error) => completer.completeError(error));
     return completer.future;
