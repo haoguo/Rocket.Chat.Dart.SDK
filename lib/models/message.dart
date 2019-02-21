@@ -30,7 +30,7 @@ class Message {
   String msg;
 
   @JsonKey(name: 'editedBy', includeIfNull: false)
-  String editedBy;
+  User editedBy;
 
   @JsonKey(name: 'groupable', includeIfNull: false)
   bool groupable;
