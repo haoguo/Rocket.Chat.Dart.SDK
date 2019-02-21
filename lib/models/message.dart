@@ -35,7 +35,8 @@ class Message {
   @JsonKey(name: 'groupable', includeIfNull: false)
   bool groupable;
 
-  @JsonKey(name: 'editedAt', includeIfNull: false)
+  @JsonKey(
+      name: 'editedAt', includeIfNull: false, fromJson: _fromJsonToDateTime)
   DateTime editedAt;
 
   @JsonKey(name: 'ts', includeIfNull: false, fromJson: _fromJsonToDateTime)
