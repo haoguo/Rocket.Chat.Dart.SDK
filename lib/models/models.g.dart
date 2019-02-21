@@ -122,7 +122,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     ..id = json['_id'] as String
     ..roomId = json['rid'] as String
     ..msg = json['msg'] as String
-    ..editedBy = json['editedBy'] as String
+    ..editedBy = json['editedBy'] == null
+        ? null
+        : User.fromJson(json['editedBy'] as Map<String, dynamic>)
     ..groupable = json['groupable'] as bool
     ..editedAt = json['editedAt'] == null
         ? null
