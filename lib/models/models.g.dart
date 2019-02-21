@@ -126,9 +126,8 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
         ? null
         : User.fromJson(json['editedBy'] as Map<String, dynamic>)
     ..groupable = json['groupable'] as bool
-    ..editedAt = json['editedAt'] == null
-        ? null
-        : DateTime.parse(json['editedAt'] as String)
+    ..editedAt =
+        json['editedAt'] == null ? null : _fromJsonToDateTime(json['editedAt'])
     ..timestamp = json['ts'] == null ? null : _fromJsonToDateTime(json['ts'])
     ..type = json['t'] as String
     ..updatedAt = json['_updatedAt'] == null
