@@ -111,4 +111,14 @@ abstract class _ClientMessagesMixin implements _DdpClientWrapper {
         .catchError((error) => completer.completeError(error));
     return completer.future;
   }
+
+  Future<void> setReaction(Message message, String emoji, bool shouldReact) {
+    Completer<void> completer = Completer();
+    this
+        ._getDdpClient()
+        .call('setReaction', [emoji, message.id, shouldReact])
+        .then((call) => completer.complete(call))
+        .catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
 }
