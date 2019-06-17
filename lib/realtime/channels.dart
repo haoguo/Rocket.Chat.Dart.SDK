@@ -1,6 +1,16 @@
 part of realtime;
 
 abstract class _ClientChannelsMixin implements _DdpClientWrapper {
+  Future<String> createDirectMessage(String username) {
+    Completer<String> completer = Completer();
+    this
+        ._getDdpClient()
+        .call('createDirectMessage', [username])
+        .then((call) => completer.complete(call.reply["rid"] as String))
+        .catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
+
   Future<String> getChannelId(String name) {
     Completer<String> completer = Completer();
     this

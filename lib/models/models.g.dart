@@ -122,11 +122,12 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     ..id = json['_id'] as String
     ..roomId = json['rid'] as String
     ..msg = json['msg'] as String
-    ..editedBy = json['editedBy'] as String
-    ..groupable = json['groupable'] as bool
-    ..editedAt = json['editedAt'] == null
+    ..editedBy = json['editedBy'] == null
         ? null
-        : DateTime.parse(json['editedAt'] as String)
+        : User.fromJson(json['editedBy'] as Map<String, dynamic>)
+    ..groupable = json['groupable'] as bool
+    ..editedAt =
+        json['editedAt'] == null ? null : _fromJsonToDateTime(json['editedAt'])
     ..timestamp = json['ts'] == null ? null : _fromJsonToDateTime(json['ts'])
     ..type = json['t'] as String
     ..updatedAt = json['_updatedAt'] == null

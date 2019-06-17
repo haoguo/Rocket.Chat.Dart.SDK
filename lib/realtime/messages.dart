@@ -27,13 +27,12 @@ abstract class _ClientMessagesMixin implements _DdpClientWrapper {
   Future<Message> sendMessage(String roomId, String text) {
     Completer<Message> completer = Completer();
     final message = Message()
-      ..id = _randomId()
       ..roomId = roomId
       ..msg = text;
     this
         ._getDdpClient()
         .call('sendMessage', [message])
-        .then((call) => Message())
+        .then((call) => completer.complete(Message.fromJson(call.reply)))
         .catchError((error) => completer.completeError(error));
     return completer.future;
   }
@@ -107,6 +106,16 @@ abstract class _ClientMessagesMixin implements _DdpClientWrapper {
     this
         ._getDdpClient()
         .call('unpinMessage', [message])
+        .then((call) => completer.complete(call))
+        .catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
+
+  Future<void> setReaction(Message message, String emoji, bool shouldReact) {
+    Completer<void> completer = Completer();
+    this
+        ._getDdpClient()
+        .call('setReaction', [emoji, message.id, shouldReact])
         .then((call) => completer.complete(call))
         .catchError((error) => completer.completeError(error));
     return completer.future;

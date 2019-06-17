@@ -30,12 +30,13 @@ class Message {
   String msg;
 
   @JsonKey(name: 'editedBy', includeIfNull: false)
-  String editedBy;
+  User editedBy;
 
   @JsonKey(name: 'groupable', includeIfNull: false)
   bool groupable;
 
-  @JsonKey(name: 'editedAt', includeIfNull: false)
+  @JsonKey(
+      name: 'editedAt', includeIfNull: false, fromJson: _fromJsonToDateTime)
   DateTime editedAt;
 
   @JsonKey(name: 'ts', includeIfNull: false, fromJson: _fromJsonToDateTime)
