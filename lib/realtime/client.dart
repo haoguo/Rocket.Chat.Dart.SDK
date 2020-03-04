@@ -15,6 +15,7 @@ part 'messages.dart';
 part 'permissons.dart';
 part 'subscriptions.dart';
 part 'users.dart';
+part 'livechat.dart';
 
 abstract class _DdpClientWrapper {
   ddp.DdpClient _getDdpClient();
@@ -30,7 +31,8 @@ class Client extends Object
         _ClientPermissionsMixin,
         _ClientMessagesMixin,
         _ClientUsersMixin,
-        _ClientSubscriptionsMixin
+        _ClientSubscriptionsMixin,
+        _ClientLiveChatMixin
     implements _DdpClientWrapper {
   Client(String name, Uri uri, bool debug) {
     String wsUrl = 'ws';
@@ -42,7 +44,7 @@ class Client extends Object
     if (uri.port != null) {
       port = uri.port;
     }
-    wsUrl = '$wsUrl://${uri.host}:$port${uri.path}/websocket';
+    wsUrl = '$wsUrl://${uri.host}:$port/websocket';
     this._ddp = ddp.DdpClient(name, wsUrl, uri.toString());
     if (debug) {
       this._ddp.setSocketLogActive(true);
