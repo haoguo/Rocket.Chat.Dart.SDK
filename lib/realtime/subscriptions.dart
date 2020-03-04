@@ -8,11 +8,20 @@ class UpdateEvent {
 }
 
 abstract class _ClientSubscriptionsMixin implements _DdpClientWrapper {
-  Future<String> subRoomMessages(String name) {
+  Future<String> subRoomMessages(String name, {String token}) {
     Completer<String> completer = Completer();
     this
         ._getDdpClient()
-        .sub('stream-room-messages', [name, true])
+        .sub('stream-room-messages', token != null ? [
+          name,
+          <String, dynamic>{
+            'useCollection': true,
+            'args': [<String, dynamic>{
+              'token': token,
+              'visitorToken': token
+            }],
+          },
+        ] : [name, true])
         .then((call) => completer.complete(call.id))
         .catchError((error) => completer.completeError(error));
     return completer.future;
@@ -42,13 +51,12 @@ abstract class _ClientSubscriptionsMixin implements _DdpClientWrapper {
     this
         ._getDdpClient()
         .collectionByName('stream-room-messages')
-        .addUpdateListener((String collection, String operation, String id,
-            Map<String, dynamic> doc) {
-      controller.add(UpdateEvent()
-        ..collection = collection
-        ..operation = operation
-        ..id = id
-        ..doc = doc);
+        .addUpdateListener((collection, operation, id, doc) {
+          controller.add(UpdateEvent()
+            ..collection = collection
+            ..operation = operation
+            ..id = id
+            ..doc = doc);
     });
     return controller.stream;
   }
