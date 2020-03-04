@@ -31,7 +31,7 @@ Channel _$ChannelFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ChannelToJson(Channel instance) {
-  final val = <String, dynamic>{
+  var val = <String, dynamic>{
     '_id': instance.id,
     'name': instance.name,
   };
@@ -102,32 +102,17 @@ Map<String, dynamic> _$PaginationToJson(Pagination instance) =>
       'total': instance.total
     };
 
-RoomMessageHistory _$RoomMessageHistoryFromJson(Map<String, dynamic> json) {
-  return RoomMessageHistory()
-    ..unreadNotLoaded = json['unreadNotLoaded'] as int
-    ..messages = (json['messages'] as List)
-        ?.map((e) =>
-            e == null ? null : Message.fromJson(e as Map<String, dynamic>))
-        ?.toList();
-}
-
-Map<String, dynamic> _$RoomMessageHistoryToJson(RoomMessageHistory instance) =>
-    <String, dynamic>{
-      'unreadNotLoaded': instance.unreadNotLoaded,
-      'messages': instance.messages
-    };
-
 Message _$MessageFromJson(Map<String, dynamic> json) {
   return Message()
     ..id = json['_id'] as String
     ..roomId = json['rid'] as String
+    ..token = json['token'] as String
     ..msg = json['msg'] as String
-    ..editedBy = json['editedBy'] == null
-        ? null
-        : User.fromJson(json['editedBy'] as Map<String, dynamic>)
+    ..editedBy = json['editedBy'] as String
     ..groupable = json['groupable'] as bool
-    ..editedAt =
-        json['editedAt'] == null ? null : _fromJsonToDateTime(json['editedAt'])
+    ..editedAt = json['editedAt'] == null
+        ? null
+        : DateTime.parse(json['editedAt'] as String)
     ..timestamp = json['ts'] == null ? null : _fromJsonToDateTime(json['ts'])
     ..type = json['t'] as String
     ..updatedAt = json['_updatedAt'] == null
@@ -156,9 +141,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$MessageToJson(Message instance) {
-  final val = <String, dynamic>{
+  var val = <String, dynamic>{
     '_id': instance.id,
     'rid': instance.roomId,
+    'token': instance.token,
     'msg': instance.msg,
   };
 
@@ -207,7 +193,7 @@ PostMessage _$PostMessageFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PostMessageToJson(PostMessage instance) {
-  final val = <String, dynamic>{};
+  var val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -230,19 +216,19 @@ Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
   return Attachment()
     ..color = json['color'] as String
     ..text = json['text'] as String
-    ..timestamp = json['ts'] == null ? null : _fromJsonToDateTime(json['ts'])
-    ..thumbUrl = json['thumb_url'] as String
-    ..messageLink = json['message_link'] as String
+    ..timestamp = json['timestamp'] as String
+    ..thumbUrl = json['thumbUrl'] as String
+    ..messageLink = json['messageLink'] as String
     ..collapsed = json['collapsed'] as bool
-    ..authorName = json['author_name'] as String
-    ..authorLink = json['author_link'] as String
-    ..authorIcon = json['author_icon'] as String
+    ..authorName = json['authorName'] as String
+    ..authorLink = json['authorLink'] as String
+    ..authorIcon = json['authorIcon'] as String
     ..title = json['title'] as String
-    ..titleLink = json['title_link'] as String
-    ..titleLinkDownload = json['title_link_download'] as bool
-    ..imageUrl = json['image_url'] as String
-    ..audioUrl = json['audio_url'] as String
-    ..videoUrl = json['video_url'] as String
+    ..titleLink = json['titleLink'] as String
+    ..titleLinkDownload = json['titleLinkDownload'] as String
+    ..imageUrl = json['imageUrl'] as String
+    ..audioUrl = json['audioUrl'] as String
+    ..videoUrl = json['videoUrl'] as String
     ..fields = (json['fields'] as List)
         ?.map((e) => e == null
             ? null
@@ -251,7 +237,7 @@ Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$AttachmentToJson(Attachment instance) {
-  final val = <String, dynamic>{};
+  var val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -261,19 +247,19 @@ Map<String, dynamic> _$AttachmentToJson(Attachment instance) {
 
   writeNotNull('color', instance.color);
   writeNotNull('text', instance.text);
-  writeNotNull('ts', instance.timestamp?.toIso8601String());
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('message_link', instance.messageLink);
+  writeNotNull('timestamp', instance.timestamp);
+  writeNotNull('thumbUrl', instance.thumbUrl);
+  writeNotNull('messageLink', instance.messageLink);
   writeNotNull('collapsed', instance.collapsed);
-  writeNotNull('author_name', instance.authorName);
-  writeNotNull('author_link', instance.authorLink);
-  writeNotNull('author_icon', instance.authorIcon);
+  writeNotNull('authorName', instance.authorName);
+  writeNotNull('authorLink', instance.authorLink);
+  writeNotNull('authorIcon', instance.authorIcon);
   writeNotNull('title', instance.title);
-  writeNotNull('title_link', instance.titleLink);
-  writeNotNull('title_link_download', instance.titleLinkDownload);
-  writeNotNull('image_url', instance.imageUrl);
-  writeNotNull('audio_url', instance.audioUrl);
-  writeNotNull('video_url', instance.videoUrl);
+  writeNotNull('titleLink', instance.titleLink);
+  writeNotNull('titleLinkDownload', instance.titleLinkDownload);
+  writeNotNull('imageUrl', instance.imageUrl);
+  writeNotNull('audioUrl', instance.audioUrl);
+  writeNotNull('videoUrl', instance.videoUrl);
   writeNotNull('fields', instance.fields);
   return val;
 }
