@@ -121,6 +121,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
   return Message()
     ..id = json['_id'] as String
     ..roomId = json['rid'] as String
+    ..token = json['token'] as String
     ..msg = json['msg'] as String
     ..editedBy = json['editedBy'] == null
         ? null
