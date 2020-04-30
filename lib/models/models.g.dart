@@ -161,6 +161,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
     '_id': instance.id,
     'rid': instance.roomId,
     'msg': instance.msg,
+    'token': instance.token,
   };
 
   void writeNotNull(String key, dynamic value) {
