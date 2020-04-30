@@ -1,6 +1,22 @@
 part of models;
 
 @JsonSerializable()
+class RoomMessageHistory {
+  RoomMessageHistory();
+
+  @JsonKey(name: 'unreadNotLoaded')
+  int unreadNotLoaded;
+
+  @JsonKey(name: 'messages')
+  List<Message> messages;
+
+  factory RoomMessageHistory.fromJson(Map<String, dynamic> json) =>
+      _$RoomMessageHistoryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RoomMessageHistoryToJson(this);
+}
+
+@JsonSerializable()
 class Message {
   Message();
 
@@ -17,12 +33,13 @@ class Message {
   String msg;
 
   @JsonKey(name: 'editedBy', includeIfNull: false)
-  String editedBy;
+  User editedBy;
 
   @JsonKey(name: 'groupable', includeIfNull: false)
   bool groupable;
 
-  @JsonKey(name: 'editedAt', includeIfNull: false)
+  @JsonKey(
+      name: 'editedAt', includeIfNull: false, fromJson: _fromJsonToDateTime)
   DateTime editedAt;
 
   @JsonKey(name: 'ts', includeIfNull: false, fromJson: _fromJsonToDateTime)
@@ -101,34 +118,34 @@ class Attachment {
   String color;
   @JsonKey(includeIfNull: false)
   String text;
-  @JsonKey(includeIfNull: false)
-  String timestamp;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'ts', includeIfNull: false, fromJson: _fromJsonToDateTime)
+  DateTime timestamp;
+  @JsonKey(name: 'thumb_url', includeIfNull: false)
   String thumbUrl;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'message_link', includeIfNull: false)
   String messageLink;
   @JsonKey(includeIfNull: false)
   bool collapsed;
 
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'author_name', includeIfNull: false)
   String authorName;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'author_link', includeIfNull: false)
   String authorLink;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'author_icon', includeIfNull: false)
   String authorIcon;
 
   @JsonKey(includeIfNull: false)
   String title;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'title_link', includeIfNull: false)
   String titleLink;
-  @JsonKey(includeIfNull: false)
-  String titleLinkDownload;
+  @JsonKey(name: 'title_link_download', includeIfNull: false)
+  bool titleLinkDownload;
 
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'image_url', includeIfNull: false)
   String imageUrl;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'audio_url', includeIfNull: false)
   String audioUrl;
-  @JsonKey(includeIfNull: false)
+  @JsonKey(name: 'video_url', includeIfNull: false)
   String videoUrl;
 
   @JsonKey(includeIfNull: false)

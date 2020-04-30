@@ -51,12 +51,13 @@ abstract class _ClientSubscriptionsMixin implements _DdpClientWrapper {
     this
         ._getDdpClient()
         .collectionByName('stream-room-messages')
-        .addUpdateListener((collection, operation, id, doc) {
-          controller.add(UpdateEvent()
-            ..collection = collection
-            ..operation = operation
-            ..id = id
-            ..doc = doc);
+        .addUpdateListener((String collection, String operation, String id,
+            Map<String, dynamic> doc) {
+      controller.add(UpdateEvent()
+        ..collection = collection
+        ..operation = operation
+        ..id = id
+        ..doc = doc);
     });
     return controller.stream;
   }
