@@ -38,7 +38,7 @@ abstract class _ClientLiveChatMixin extends _DdpClientWrapper {
     this
         ._getDdpClient()
         .call('sendMessageLivechat', [message])
-        .then((call) => completer.complete(Message.fromJson(call.reply)))
+        .then((call) => completer.complete(Message.fromJson(call.reply ?? {})))
         .catchError((error) => completer.completeError(error));
     return completer.future;
   }

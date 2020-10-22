@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
-import 'package:ddp/ddp.dart' as ddp;
+import 'package:enhanced_ddp/enhanced_ddp.dart' as ddp;
 import 'package:rocket_chat_dart/models/models.dart';
 
 part 'channels.dart';
