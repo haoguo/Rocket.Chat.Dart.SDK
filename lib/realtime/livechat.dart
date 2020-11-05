@@ -11,7 +11,7 @@ abstract class _ClientLiveChatMixin extends _DdpClientWrapper {
     return completer.future;
   }
 
-  Future<dynamic> registerGuestLiveChat(String token, String name, {String email, String department}) {
+  Future<dynamic> registerGuestLiveChat(String token, String name, {String email, String department, List<Map<String, String>> customFields}) {
     Completer<dynamic> completer = Completer();
     this
         ._getDdpClient()
@@ -20,7 +20,8 @@ abstract class _ClientLiveChatMixin extends _DdpClientWrapper {
             'token': token,
             'name': name,
             'email': email,
-            'department': department
+            'department': department,
+            'customFields': customFields,
           },
         ])
         .then((call) => completer.complete(call.reply))
