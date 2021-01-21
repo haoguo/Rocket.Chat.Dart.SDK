@@ -35,7 +35,7 @@ abstract class _ClientLiveChatMixin extends _DdpClientWrapper {
       ..roomId = roomId
       ..msg = text
       ..token = token
-      ..id = id != null ? id : _randomId();
+      ..id = id ?? _randomId();
     this
         ._getDdpClient()
         .call('sendMessageLivechat', [message])

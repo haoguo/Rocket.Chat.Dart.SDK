@@ -7,7 +7,7 @@ environment:
   sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
-  enhanced_ddp: ^1.2.2+2
+  enhanced_ddp: ^1.2.3
   crypto: ^2.1.5
   http: ^0.12.2
   json_annotation: ^3.1.1

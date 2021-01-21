@@ -62,6 +62,41 @@ abstract class _ClientSubscriptionsMixin implements _DdpClientWrapper {
     return controller.stream;
   }
 
+  Future<String> subRoomEventTyping(String roomId, {String token}) {
+    Completer<String> completer = Completer();
+    this
+        ._getDdpClient()
+        .sub('stream-notify-room', token != null ? [
+          '$roomId/typing',
+          <String, dynamic>{
+            'useCollection': true,
+            'args': [<String, dynamic>{
+              'token': token,
+              'visitorToken': token
+            }],
+          },
+        ] : ['$roomId/typing', true])
+        .then((call) => completer.complete(call.id))
+        .catchError((error) => completer.completeError(error));
+    return completer.future;
+  }
+
+  Stream<UpdateEvent> roomEvents() {
+    StreamController<UpdateEvent> controller = StreamController();
+    this
+        ._getDdpClient()
+        .collectionByName('stream-notify-room')
+        .addUpdateListener((String collection, String operation, String id,
+            Map<String, dynamic> doc) {
+      controller.add(UpdateEvent()
+        ..collection = collection
+        ..operation = operation
+        ..id = id
+        ..doc = doc);
+    });
+    return controller.stream;
+  }
+
   Stream<Channel> roomsChanged() {
     StreamController<Channel> controller = StreamController();
     this
