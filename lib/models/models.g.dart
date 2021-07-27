@@ -121,6 +121,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
   return Message()
     ..id = json['_id'] as String
     ..roomId = json['rid'] as String
+    ..token = json['token'] as String
     ..msg = json['msg'] as String
     ..editedBy = json['editedBy'] == null
         ? null
@@ -160,6 +161,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
     '_id': instance.id,
     'rid': instance.roomId,
     'msg': instance.msg,
+    'token': instance.token,
   };
 
   void writeNotNull(String key, dynamic value) {

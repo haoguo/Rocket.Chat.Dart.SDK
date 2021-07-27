@@ -26,7 +26,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
     if (unreads != null) {
       query.write('&unreads=$unreads');
     }
-    http.get('${_getUrl()}/groups.history?${query.toString()}', headers: {
+    http.get(Uri.https('${_getUrl()}', '/groups.history?${query.toString()}'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
@@ -48,17 +48,19 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   }) {
     Completer<Channel> completer = Completer();
     http
-        .post('${_getUrl()}/groups.create',
+        .post(Uri.https('${_getUrl()}', '/groups.create'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
               'Content-Type': 'application/json',
             },
-            body: json.encode(<String, dynamic>{
-              'name': name,
-              'members': members,
-              'readOnly': readOnly,
-            }))
+            body: json.encode(
+              <String, dynamic>{
+                'name': name,
+                'members': members,
+                'readOnly': readOnly,
+              },
+            ))
         .then((response) {
       _hackResponseHeader(response);
       completer.complete(Channel.fromJson(json.decode(response.body)['group']));
@@ -69,16 +71,18 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   Future<void> groupsSetTopic(String roomId, String topic) {
     Completer<void> completer = Completer();
     http
-        .post('${_getUrl()}/groups.setTopic',
+        .post(Uri.https('${_getUrl()}', '/groups.setTopic'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
               'Content-Type': 'application/json',
             },
-            body: json.encode(<String, dynamic>{
-              'roomId': roomId,
-              'topic': topic,
-            }))
+            body: json.encode(
+              <String, dynamic>{
+                'roomId': roomId,
+                'topic': topic,
+              },
+            ))
         .then((response) {
       completer.complete(null);
     }).catchError((error) => completer.completeError(error));
@@ -88,16 +92,18 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   Future<Channel> groupsInvite(String roomId, String userId) {
     Completer<Channel> completer = Completer();
     http
-        .post('${_getUrl()}/groups.invite',
+        .post(Uri.https('${_getUrl()}', '/groups.invite'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
               'Content-Type': 'application/json',
             },
-            body: json.encode(<String, dynamic>{
-              'roomId': roomId,
-              'userId': userId,
-            }))
+            body: json.encode(
+              <String, dynamic>{
+                'roomId': roomId,
+                'userId': userId,
+              },
+            ))
         .then((response) {
       _hackResponseHeader(response);
       completer.complete(Channel.fromJson(json.decode(response.body)['group']));
@@ -108,16 +114,18 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   Future<Channel> groupsKick(String roomId, String userId) {
     Completer<Channel> completer = Completer();
     http
-        .post('${_getUrl()}/groups.kick',
+        .post(Uri.https('${_getUrl()}', '/groups.kick'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
               'Content-Type': 'application/json',
             },
-            body: json.encode(<String, dynamic>{
-              'roomId': roomId,
-              'userId': userId,
-            }))
+            body: json.encode(
+              <String, dynamic>{
+                'roomId': roomId,
+                'userId': userId,
+              },
+            ))
         .then((response) {
       _hackResponseHeader(response);
       completer.complete(Channel.fromJson(json.decode(response.body)['group']));
@@ -128,15 +136,17 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   Future<void> groupsLeave(String roomId) {
     Completer<void> completer = Completer();
     http
-        .post('${_getUrl()}/groups.leave',
+        .post(Uri.https('${_getUrl()}', '/groups.leave'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
               'Content-Type': 'application/json',
             },
-            body: json.encode(<String, dynamic>{
-              'roomId': roomId,
-            }))
+            body: json.encode(
+              <String, dynamic>{
+                'roomId': roomId,
+              },
+            ))
         .then((response) {
       _hackResponseHeader(response);
       completer.complete((void val) => completer.complete(null));
@@ -157,15 +167,13 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
     if (count != null) {
       query.write('&count=$count');
     }
-    http.get('${_getUrl()}/groups.members?${query.toString()}', headers: {
+    http.get(Uri.https('${_getUrl()}', '/groups.members?${query.toString()}'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
       _hackResponseHeader(response);
       final rawResponse = json.decode(response.body);
-      final users = (rawResponse['members'] as List)
-          .map<User>((u) => User.fromJson(u))
-          .toList();
+      final users = (rawResponse['members'] as List).map<User>((u) => User.fromJson(u)).toList();
       completer.complete(users);
     }).catchError((error) => completer.completeError(error));
     return completer.future;
@@ -173,7 +181,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
 
   Future<List<Channel>> listGroups() {
     Completer<List<Channel>> completer = Completer();
-    http.get('${_getUrl()}/groups.list', headers: {
+    http.get(Uri.https('${_getUrl()}', '/groups.list'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {

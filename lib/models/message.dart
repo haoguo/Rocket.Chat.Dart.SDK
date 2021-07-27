@@ -26,6 +26,9 @@ class Message {
   @JsonKey(name: 'rid')
   String roomId;
 
+  @JsonKey(name: 'token')
+  String token;
+
   @JsonKey(name: 'msg')
   String msg;
 
