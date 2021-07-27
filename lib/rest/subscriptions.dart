@@ -3,7 +3,7 @@ part of rest;
 abstract class _ClientSubscriptionsMixin implements _ClientWrapper {
   Future<List<ChannelSubscription>> getSubscriptions() {
     Completer<List<ChannelSubscription>> completer = Completer();
-    http.get('${_getUrl()}/subscriptions.get', headers: {
+    http.get(Uri.https('${_getUrl()}', '/subscriptions.get'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
@@ -20,7 +20,7 @@ abstract class _ClientSubscriptionsMixin implements _ClientWrapper {
 
   Future<ChannelSubscription> getSubscriptionsOne(String roomId) {
     Completer<ChannelSubscription> completer = Completer();
-    http.get('${_getUrl()}/subscriptions.getOne?roomId=$roomId', headers: {
+    http.get(Uri.https('${_getUrl()}', '/subscriptions.getOne?roomId=$roomId'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
@@ -39,13 +39,17 @@ abstract class _ClientSubscriptionsMixin implements _ClientWrapper {
   Future<void> markAsRead(String rid) {
     Completer<void> completer = Completer();
     http
-        .post('${_getUrl()}/subscriptions.read',
-            headers: {
-              'X-User-Id': _auth._id,
-              'X-Auth-Token': _auth._token,
-              'Content-Type': 'application/json',
-            },
-            body: json.encode(<String, String>{'rid': rid}))
+        .post(
+          Uri.https('${_getUrl()}', '/subscriptions.read'),
+          headers: {
+            'X-User-Id': _auth._id,
+            'X-Auth-Token': _auth._token,
+            'Content-Type': 'application/json',
+          },
+          body: json.encode(
+            <String, String>{'rid': rid},
+          ),
+        )
         .then((response) => completer.complete(null))
         .catchError((error) => completer.completeError(error));
     return completer.future;

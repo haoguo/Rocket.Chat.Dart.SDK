@@ -1,4 +1,4 @@
-import 'package:ddp/ddp.dart';
+import 'package:enhanced_ddp/enhanced_ddp.dart';
 import 'package:rocket_chat_dart/models/models.dart';
 import 'package:rocket_chat_dart/realtime/client.dart';
 import 'package:test/test.dart';

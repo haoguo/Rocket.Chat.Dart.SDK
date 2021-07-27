@@ -4,14 +4,16 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
   Future<void> login(UserCredentials credentials) {
     Completer<void> completer = Completer();
     http
-        .post('${_getUrl()}/login',
+        .post(Uri.https('${_getUrl()}', '/login'),
             headers: {
               'Content-Type': 'application/json',
             },
-            body: json.encode(<String, String>{
-              'user': credentials.name,
-              'password': credentials.password,
-            }))
+            body: json.encode(
+              <String, String>{
+                'user': credentials.name,
+                'password': credentials.password,
+              },
+            ))
         .then((response) {
       _hackResponseHeader(response);
       final data = json.decode(response.body)['data'];
@@ -26,22 +28,23 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
   }
 
   // savePushToken stores a push token and returns its id
-  Future<String> savePushToken(
-      String id, String token, String type, String appName) {
+  Future<String> savePushToken(String id, String token, String type, String appName) {
     Completer<String> completer = Completer();
     http
-        .post('${_getUrl()}/push.token',
+        .post(Uri.https('${_getUrl()}', '/push.token'),
             headers: {
               'Content-Type': 'application/json',
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
             },
-            body: json.encode(<String, String>{
-              'id': id,
-              'type': type,
-              'value': token,
-              'appName': appName,
-            }))
+            body: json.encode(
+              <String, String>{
+                'id': id,
+                'type': type,
+                'value': token,
+                'appName': appName,
+              },
+            ))
         .then((response) {
       _hackResponseHeader(response);
       final data = json.decode(response.body)['result']['_id'];

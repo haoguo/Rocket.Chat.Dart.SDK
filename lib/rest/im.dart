@@ -26,7 +26,7 @@ abstract class _ClientIMMixin implements _ClientWrapper {
     if (unreads != null) {
       query.write('&unreads=$unreads');
     }
-    http.get('${_getUrl()}/im.history?${query.toString()}', headers: {
+    http.get(Uri.https('${_getUrl()}', '/im.history?${query.toString()}'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
@@ -44,7 +44,7 @@ abstract class _ClientIMMixin implements _ClientWrapper {
   Future<Channel> createIM(String username) {
     Completer<Channel> completer = Completer();
     http
-        .post('${_getUrl()}/im.create',
+        .post(Uri.https('${_getUrl()}', '/im.create'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
@@ -63,7 +63,7 @@ abstract class _ClientIMMixin implements _ClientWrapper {
 
   Future<List<Channel>> listIMs() {
     Completer<List<Channel>> completer = Completer();
-    http.get('${_getUrl()}/im.list', headers: {
+    http.get(Uri.https('${_getUrl()}', '/im.list'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {

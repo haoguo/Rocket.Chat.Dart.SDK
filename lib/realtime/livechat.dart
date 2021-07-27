@@ -1,11 +1,14 @@
 part of realtime;
 
-abstract class _ClientLiveChatMixin extends _DdpClientWrapper {
+abstract class _ClientLiveChatMixin implements _DdpClientWrapper {
   Future<dynamic> getInitialDataLiveChat(String token) {
     Completer<dynamic> completer = Completer();
     this
         ._getDdpClient()
-        .call('livechat:getInitialData', [token])
+        .call(
+          'livechat:getInitialData',
+          [token],
+        )
         .then((call) => completer.complete(call.reply))
         .catchError((error) => completer.completeError(error));
     return completer.future;
@@ -38,7 +41,10 @@ abstract class _ClientLiveChatMixin extends _DdpClientWrapper {
       ..id = id ?? _randomId();
     this
         ._getDdpClient()
-        .call('sendMessageLivechat', [message])
+        .call(
+          'sendMessageLivechat',
+          [message],
+        )
         .then((call) => completer.complete(Message.fromJson(call.reply ?? {})))
         .catchError((error) => completer.completeError(error));
     return completer.future;
@@ -52,10 +58,12 @@ abstract class _ClientLiveChatMixin extends _DdpClientWrapper {
           name,
           <String, dynamic>{
             'useCollection': true,
-            'args': [<String, dynamic>{
-              'token': token,
-              'visitorToken': token
-            }],
+            'args': [
+              <String, dynamic>{
+                'token': token,
+                'visitorToken': token,
+              },
+            ],
           },
         ])
         .then((call) => completer.complete(call.id))
